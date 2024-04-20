@@ -1,0 +1,51 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""product-type"""
+type ProductType {
+  id: ID!
+  name: String!
+  state: AvailabilityState!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum AvailabilityState {
+  DRAFT
+  PUBLISHED
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""product"""
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  state: AvailabilityState!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  type: ProductType
+}
+
+type Query {
+  product(id: String!): Product!
+  products(skip: Int! = 0, take: Int! = 25): [Product!]!
+}
+
+type Mutation {
+  createProduct(newProductData: NewProductInput!): Product!
+}
+
+input NewProductInput {
+  name: String!
+  price: Float!
+  state: AvailabilityState!
+  productTypeId: String!
+  description: String
+}
